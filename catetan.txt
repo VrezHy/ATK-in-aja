@@ -4,7 +4,7 @@ Admin:
 2. Melihat daftar produk.
 
 //TODO
-Update produk, delete produk
+CRUD produk (Update produk, delete produk)
 History CRUD
 History transaksi
 Data Dummy

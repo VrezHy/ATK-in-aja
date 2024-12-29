@@ -25,25 +25,29 @@ public class BuyerController {
             System.out.println("4. Lihat History Transaksi");
             System.out.println("5. Keluar");
             System.out.print("Pilih Opsi: ");
-            int choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1:
-                    viewProducts();
-                    break;
-                case 2:
-                    addToCart(scanner, username);
-                    break;
-                case 3:
-                    checkout(scanner, username);
-                    break;
-                case 4:
-                    viewTransactionHistory();
-                    break;
-                case 5:
-                    return;
-                default:
-                    System.out.println("Pilihan Tidak valid.");
+            try {
+                int choice = scanner.nextInt(); 
+                switch (choice) {
+                    case 1:
+                        viewProducts();
+                        break;
+                    case 2:
+                        addToCart(scanner, username);
+                        break;
+                    case 3:
+                        checkout(scanner, username);
+                        break;
+                    case 4:
+                        viewTransactionHistory(username);
+                        break;
+                    case 5:
+                        return;
+                    default:
+                        System.out.println("Pilihan Tidak valid.");
+                }
+            } catch (Exception e) {
+                System.out.println("Input tidak valid. Harap masukkan angka yang valid.");
+                scanner.nextLine(); // Menangani input yang tidak valid
             }
         }
     }
@@ -77,13 +81,20 @@ public class BuyerController {
         Transaction transaction = new Transaction(username, productId, quantity, totalPrice);
         transactionList.addTransaction(product, transaction);
 
-        // Reduce stock
+        // Update stock
         product.setStock(product.getStock() - quantity);
 
         System.out.println("Produk berhasil ditambahkan ke keranjang!");
+        System.out.println("Total harga: " + totalPrice);
     }
 
     private void checkout(Scanner scanner, String username) {
+        // Pastikan keranjang tidak kosong
+        if (transactionList.getTransactionsByUsername(username).isEmpty()) {
+            System.out.println("Keranjang Anda kosong. Silakan tambahkan produk terlebih dahulu.");
+            return;
+        }
+
         System.out.println("\n=== Checkout ===");
         System.out.println("Masukkan Metode Pembayaran (Tunai, Kartu, E-Wallet, Qris): ");
         String paymentMethod = scanner.next();
@@ -91,8 +102,11 @@ public class BuyerController {
         System.out.println("Transaksi berhasil menggunakan " + paymentMethod + "!");
     }
 
-    private void viewTransactionHistory() {
+    private void viewTransactionHistory(String username) {
         System.out.println("\n=== History Transaksi ===");
-        transactionList.printAllTransactions();
+        // Mengambil transaksi berdasarkan username
+        for (Transaction transaction : transactionList.getTransactionsByUsername(username)) {
+            System.out.println(transaction);
+        }
     }
 }

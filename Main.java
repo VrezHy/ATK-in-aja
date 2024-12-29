@@ -24,20 +24,26 @@ public class Main {
             System.out.println("2. Register");
             System.out.println("3. Keluar");
             System.out.print("Pilih opsi: ");
-            int choice = scanner.nextInt();
 
-            switch (choice) {
-                case 1:
-                    login(scanner);
-                    break;
-                case 2:
-                    register(scanner);
-                    break;
-                case 3:
-                    System.out.println("Keluar dari aplikasi...");
-                    return;
-                default:
-                    System.out.println("Pilihan tidak valid. Coba lagi.");
+            try {
+                int choice = scanner.nextInt(); // Menangkap input sebagai integer
+                
+                switch (choice) {
+                    case 1:
+                        login(scanner);
+                        break;
+                    case 2:
+                        register(scanner);
+                        break;
+                    case 3:
+                        System.out.println("Keluar dari aplikasi...");
+                        return;
+                    default:
+                        System.out.println("Pilihan tidak valid. Coba lagi.");
+                }
+            } catch (Exception e) {
+                System.out.println("Input tidak valid. Harap masukkan angka yang valid.");
+                scanner.nextLine();
             }
         }
     }
@@ -70,7 +76,7 @@ public class Main {
             System.out.println("Login berhasil! Selamat datang, " + user.getUsername() + ".");
             if ("Admin".equalsIgnoreCase(role)) {
                 AdminController adminController = new AdminController(productList);
-                adminController.manageProducts(scanner);
+                adminController.kelolaProducts(scanner);
             } else {
                 BuyerController buyerController = new BuyerController(productList, transactionList);
                 buyerController.buyerMenu(scanner, username);
@@ -86,18 +92,11 @@ public class Main {
         String username = scanner.next();
         System.out.print("Masukkan password baru: ");
         String password = scanner.next();
-        System.out.println("Pilih role (Admin/User): ");
-        String role = scanner.next();
-
-        if (!role.equalsIgnoreCase("Admin") && !role.equalsIgnoreCase("User")) {
-            System.out.println("Role tidak valid. Harus 'Admin' atau 'User'.");
-            return;
-        }
 
         if (userList.isUsernameTaken(username)) {
             System.out.println("Username sudah digunakan. Silakan coba username lain.");
         } else {
-            userList.addUser(new User(username, password, role));
+            userList.addUser(new User(username, password, "User"));
             System.out.println("Registrasi berhasil! Silakan login menggunakan akun baru Anda.");
         }
     }

@@ -35,6 +35,6 @@ public class atk {
 
     @Override
     public String toString() {
-        return id + " - " + name + " (Price: " + price + ", Stock: " + stock + ")";
+        return id + " - " + name + " (Harga: " + price + ", Stock: " + stock + ")";
     }
 }

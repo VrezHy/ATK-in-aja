@@ -10,6 +10,11 @@ public class atkList {
 
     public atkList() {
         products = new ArrayList<>();
+
+        //data dummy
+        products.add(new atk("P001", "Pulpen", 1000.0, 100));
+        products.add(new atk("P002", "Buku", 5000.0, 50));
+        products.add(new atk("P003", "Penghapus", 2000.0, 200));
     }
 
     public void addProduct(atk product) {
@@ -27,5 +32,9 @@ public class atkList {
             }
         }
         return null;
+    }
+
+    public void removeProduct(atk product) {
+        products.remove(product);
     }
 }

@@ -2,11 +2,12 @@ Admin:
 
 1. Menambahkan produk baru.
 2. Melihat daftar produk.
+3. Hapus daftar produk.
+4. History pembeli
 
 //TODO
-CRUD produk (Update produk, delete produk)
+CRUD produk (Edit produk)
 History CRUD
-History transaksi
 Data Dummy
 
 User:
@@ -14,8 +15,7 @@ User:
 1. Melihat etalase produk.
 2. Menambahkan produk ke keranjang (dengan validasi stok).
 3. Checkout dan memilih metode pembayaran.
-4. Melihat riwayat transaksi.
+4. Melihat riwayat transaksi. (sudah setting setiap pembeli hanya bisa melihat riwayatnya sendiri)
 
 //TODO
 1. Input pembayaran dan kembaliannnya
-2. Contoh data dummy diawal

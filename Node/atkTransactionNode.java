@@ -6,12 +6,13 @@ import model.entity.Transaction;
 public class atkTransactionNode {
     private atk product;
     private Transaction transaction;
-    private atkTransactionNode next;
-
+    private atkTransactionNode nextTransaction;
+    private atkTransactionNode nextProduct; 
     public atkTransactionNode(atk product, Transaction transaction) {
         this.product = product;
         this.transaction = transaction;
-        this.next = null;
+        this.nextTransaction = null;
+        this.nextProduct = null;
     }
 
     public atk getProduct() {
@@ -22,11 +23,19 @@ public class atkTransactionNode {
         return transaction;
     }
 
-    public atkTransactionNode getNext() {
-        return next;
+    public atkTransactionNode getNextTransaction() {
+        return nextTransaction;
     }
 
-    public void setNext(atkTransactionNode next) {
-        this.next = next;
+    public void setNextTransaction(atkTransactionNode nextTransaction) {
+        this.nextTransaction = nextTransaction;
+    }
+
+    public atkTransactionNode getNextProduct() {
+        return nextProduct;
+    }
+
+    public void setNextProduct(atkTransactionNode nextProduct) {
+        this.nextProduct = nextProduct;
     }
 }

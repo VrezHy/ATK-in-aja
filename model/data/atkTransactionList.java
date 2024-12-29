@@ -12,6 +12,10 @@ public class atkTransactionList {
     private atkTransactionNode productHead;
 
     // tambah transaksi ke produk tertentu
+    // berisi data produk dan referensi ke data produk berikutnya
+    // berisi data transaksi pertama
+    // berisi data transaksi berikutnya
+    // one to many satu produk memiliki banyak transaksi
     public void addTransaction(atk product, Transaction transaction) {
         if (productHead == null) {
             productHead = new atkTransactionNode(product, transaction);
@@ -24,6 +28,7 @@ public class atkTransactionList {
             if (currentProduct == null) {
                 atkTransactionNode newProductNode = new atkTransactionNode(product, transaction);
                 newProductNode.setNextProduct(productHead);
+
                 productHead = newProductNode;
             } else {
                 // tambahkan transaksi ke produk tersebut
@@ -37,9 +42,10 @@ public class atkTransactionList {
     }
 
     // history transaksi
+    // Node produk menyimpandata produk
+    // Node Transaksi menyimpan detail transaksi
     public void printAllTransactions() {
         atkTransactionNode currentProduct = productHead;
-
         while (currentProduct != null) {
             System.out.println("Product: " + currentProduct.getProduct().getName());
             atkTransactionNode currentTransaction = currentProduct;
@@ -51,9 +57,9 @@ public class atkTransactionList {
         }
     }
 
+    //transaksi setiap username
     public List<Transaction> getTransactionsByUsername(String username) {
         List<Transaction> userTransactions = new LinkedList<>();
-
         atkTransactionNode currentProduct = productHead;
         while (currentProduct != null) {
             atkTransactionNode currentTransaction = currentProduct;

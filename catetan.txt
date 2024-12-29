@@ -8,7 +8,6 @@ Admin:
 //TODO
 CRUD produk (Edit produk)
 History CRUD
-Data Dummy
 
 User:
 

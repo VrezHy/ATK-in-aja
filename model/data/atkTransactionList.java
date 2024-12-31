@@ -10,6 +10,9 @@ import Node.atkTransactionNode;
 
 public class atkTransactionList {
     private atkTransactionNode productHead;
+    public atkTransactionNode getProductHead() {
+        return productHead;
+    }
 
     // tambah transaksi ke produk tertentu
     // berisi data produk dan referensi ke data produk berikutnya
@@ -46,17 +49,21 @@ public class atkTransactionList {
     // Node Transaksi menyimpan detail transaksi
     public void printAllTransactions() {
         atkTransactionNode currentProduct = productHead;
+
         while (currentProduct != null) {
-            System.out.println("Product: " + currentProduct.getProduct().getName());
-            atkTransactionNode currentTransaction = currentProduct;
+            System.out.println("Produk: " + currentProduct.getProduct().getName());
+            atkTransactionNode currentTransaction = currentProduct.getNextTransaction();
+
             while (currentTransaction != null) {
-                System.out.println("  - Transaction: " + currentTransaction.getTransaction());
+                System.out.println("  - Transaksi: " + currentTransaction.getTransaction());
                 currentTransaction = currentTransaction.getNextTransaction();
             }
+
             currentProduct = currentProduct.getNextProduct();
         }
     }
 
+    
     //transaksi setiap username
     public List<Transaction> getTransactionsByUsername(String username) {
         List<Transaction> userTransactions = new LinkedList<>();

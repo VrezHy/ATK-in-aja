@@ -70,11 +70,12 @@ public class Main {
         User user = userList.authenticate(username, password, role);
 
         if (user != null) {
-            if ("Admin".equalsIgnoreCase(role)) {
-                AdminController adminController = new AdminController(productList);
-                adminController.kelolaProducts(scanner);
+            if (role != null && "Admin".equalsIgnoreCase(role)) {
                 System.out.println("Login berhasil! Selamat datang, " + user.getUsername() + ".");
+                AdminController adminController = new AdminController(productList, transactionList);
+                adminController.kelolaProducts(scanner);
             } else {
+                System.out.println("Login berhasil! Selamat datang, " + user.getUsername() + ".");
                 BuyerController buyerController = new BuyerController(productList, transactionList);
                 buyerController.buyerMenu(scanner, user.getUsername());
             }

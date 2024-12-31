@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class BuyerController {
     private atkList productList;
     private atkTransactionList transactionList;
+    
 
     public BuyerController(atkList productList, atkTransactionList transactionList) {
         this.productList = productList;
@@ -34,7 +35,7 @@ public class BuyerController {
                         addToCart(scanner, username);
                         break;
                     case 3:
-                        viewTransactionHistory(username);
+                        viewTransactionHistory();
                         break;
                     case 4:
                         System.out.println("Kembali Halaman Login...");
@@ -93,15 +94,16 @@ public class BuyerController {
         System.out.println("Total harga : " + totalPrice);
     }
 
-    private void viewTransactionHistory(String username) {
-        System.out.println("\n=== Riwayat Transaksi ===");
-        if (transactionList.getTransactionsByUsername(username).isEmpty()) {
+    
+    private void viewTransactionHistory() {
+        
+        System.out.println("\n=== History Transaksi ===");
+        if (transactionList == null || transactionList.getProductHead() == null) {
             System.out.println("Belum ada riwayat transaksi.");
+            return;
         }
-
-        for (Transaction transaction : transactionList.getTransactionsByUsername(username)) {
-            System.out.println(transaction);
-        }
+        transactionList.printAllTransactions();
     }
+    
 
 }

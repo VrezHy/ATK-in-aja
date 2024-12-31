@@ -9,9 +9,11 @@ import java.util.Scanner;
 public class AdminController {
     private atkList productList;
     private atkTransactionList transactionList;
+    
 
-    public AdminController(atkList productList) {
+    public AdminController(atkList productList, atkTransactionList transactionList) {
         this.productList = productList;
+        this.transactionList = transactionList;
     }
 
     public void kelolaProducts(Scanner scanner) {
@@ -82,10 +84,9 @@ public class AdminController {
             System.out.println("Produk dengan ID " + id + " tidak ditemukan.");
             return;
         }
-
         // Mengedit atribut produk
         System.out.print("Edit Nama Produk: ");
-        scanner.nextLine(); // Membaca sisa newline
+        scanner.nextLine(); 
         String name = scanner.nextLine();
         System.out.print("Edit Harga Produk: ");
         double price = scanner.nextDouble();
@@ -126,7 +127,12 @@ public class AdminController {
 
     private void viewTransactionHistory() {
         System.out.println("\n=== History Transaksi ===");
+        if (transactionList == null || transactionList.getProductHead() == null) {
+            System.out.println("Belum ada riwayat transaksi.");
+            return;
+        }
         transactionList.printAllTransactions();
     }
+    
 
 }

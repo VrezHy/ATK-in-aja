@@ -3,11 +3,10 @@ Admin:
 1. Menambahkan produk baru. (tambah produk digabung dengan lihat produk saat produk ditambahkan akan ngeview lihatproduk terbaru)
 2. Melihat daftar produk.
 3. Hapus daftar produk.
-4. History pembeli
 
 //TODO
-1. CRUD produk (Edit produk)
-2. tambah produk digabung dengan lihat produk saat produk ditambahkan akan ngeview lihatproduk terbaru
+1. tambah produk digabung dengan lihat produk saat produk ditambahkan akan ngeview lihatproduk terbaru
+2. History transaksi pembeli
 
 User:
 1. Melihat etalase produk.

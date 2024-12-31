@@ -1,8 +1,9 @@
 package Controller;
 
 import model.data.atkList;
-import model.entity.atk;
 import model.data.atkTransactionList;
+import model.entity.atk;
+
 import java.util.Scanner;
 
 public class AdminController {
@@ -23,29 +24,36 @@ public class AdminController {
             System.out.println("5. history Transaksi pembeli");
             System.out.println("6. Keluar");
             System.out.print("Pilih Opsi: ");
-            int choice = scanner.nextInt();
+            try {
+                int choice = scanner.nextInt();
 
-            switch (choice) {
-                case 1:
-                    addProduct(scanner);
-                    break;
-                case 2:
-                    editProduct(scanner);
-                    break;
-                case 3:
-                    deleteProducts(scanner);
-                    break;
-                case 4:
-                    viewProducts();
-                    break;
-                case 5:
-                    viewTransactionHistory();
-                    break;
-                case 6:
-                    return;
-                default:
-                    System.out.println("Pilihan tidak valid.");
+                switch (choice) {
+                    case 1:
+                        addProduct(scanner);
+                        break;
+                    case 2:
+                        editProduct(scanner);
+                        break;
+                    case 3:
+                        deleteProducts(scanner);
+                        break;
+                    case 4:
+                        viewProducts();
+                        break;
+                    case 5:
+                        viewTransactionHistory();
+                        break;
+                    case 6:
+                        System.out.println("Kembali Halaman Login...");
+                        return;
+                    default:
+                        System.out.println("Pilihan tidak valid. Harap pilih antara 1 hingga 6.");
+                }
+            } catch (Exception e) {
+                System.out.println("Input tidak valid. Harap masukkan angka yang sesuai.");
+                scanner.nextLine();
             }
+
         }
     }
 
@@ -65,17 +73,32 @@ public class AdminController {
     }
 
     private void editProduct(Scanner scanner) {
-        System.out.print("edit ID Produk: ");
+        System.out.print("Masukkan ID Produk yang ingin diedit: ");
         String id = scanner.next();
+
+        // Mencari produk berdasarkan ID
+        atk product = productList.findProductById(id);
+        if (product == null) {
+            System.out.println("Produk dengan ID " + id + " tidak ditemukan.");
+            return;
+        }
+
+        // Mengedit atribut produk
         System.out.print("Edit Nama Produk: ");
-        String name = scanner.next();
+        scanner.nextLine(); // Membaca sisa newline
+        String name = scanner.nextLine();
         System.out.print("Edit Harga Produk: ");
         double price = scanner.nextDouble();
         System.out.print("Edit Stok Produk: ");
         int stock = scanner.nextInt();
-        atk product = new atk(id, name, price, stock);
-        productList.addProduct(product);
-        System.out.println("Produk berhasil Diedit!");
+
+        // Memperbarui data produk
+        product.setName(name);
+        product.setPrice(price);
+        product.setStock(stock);
+
+        System.out.println("Produk berhasil diedit!");
+        System.out.println("Data produk terbaru: " + product);
     }
 
     private void deleteProducts(Scanner scanner) {
@@ -93,9 +116,11 @@ public class AdminController {
     }
 
     private void viewProducts() {
-        System.out.println("\n=== List Produk ===");
-        for (atk product : productList.getProducts()) {
-            System.out.println(product);
+        System.out.println("\n=== Produk yang tersedia ===");
+        atk currentProduct = productList.getHead();
+        while (currentProduct != null) {
+            System.out.println(currentProduct);
+            currentProduct = currentProduct.getNext();
         }
     }
 

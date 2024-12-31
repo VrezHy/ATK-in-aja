@@ -2,13 +2,13 @@ package model.entity;
 
 public class Transaction {
     private String buyerUsername;
-    private String productId;
+    private String name;
     private int quantity;
     private double totalPrice;
 
-    public Transaction(String buyerUsername, String productId, int quantity, double totalPrice) {
+    public Transaction(String buyerUsername, String name, int quantity, double totalPrice) {
         this.buyerUsername = buyerUsername;
-        this.productId = productId;
+        this.name = name;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
     }
@@ -17,8 +17,8 @@ public class Transaction {
         return buyerUsername;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getName() {
+        return name;
     }
 
     public int getQuantity() {
@@ -31,6 +31,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Pembeli: " + buyerUsername + ", ID Produk: " + productId + ", Jumlah: " + quantity + ", Total Harga: " + totalPrice;
+        return "Nama pembeli: " + buyerUsername + ", Nama produk: " + name + ", Jumlah: " + quantity + ", Total Harga: " + totalPrice;
     }
 }

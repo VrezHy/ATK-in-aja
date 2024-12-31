@@ -6,11 +6,16 @@ public class atk {
     private double price;
     private int stock;
 
+    private atk next;
+    private atk previous;
+
     public atk(String id, String name, double price, int stock) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
+        this.next = null; 
+        this.previous = null;
     }
 
     public String getId() {
@@ -31,6 +36,31 @@ public class atk {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
+
+    public atk getNext() {
+        return next;
+    }
+
+    public void setNext(atk next) {
+        this.next = next;
+    }
+
+    public atk getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(atk previous) {
+        this.previous = previous;
     }
 
     @Override

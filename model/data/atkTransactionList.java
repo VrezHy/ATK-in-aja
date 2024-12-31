@@ -17,7 +17,7 @@ public class atkTransactionList {
     // berisi data transaksi berikutnya
     // one to many satu produk memiliki banyak transaksi
     public void addTransaction(atk product, Transaction transaction) {
-        if (productHead == null) {
+        if (productHead != null) {
             productHead = new atkTransactionNode(product, transaction);
         } else {
             atkTransactionNode currentProduct = productHead;

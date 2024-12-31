@@ -20,13 +20,12 @@ public class BuyerController {
         while (true) {
             System.out.println("\n=== Buyer Menu ===");
             System.out.println("1. Lihat Produk");
-            System.out.println("2. Tambahkan ke keranjang");
-            System.out.println("3. Checkout");
-            System.out.println("4. Lihat History Transaksi");
-            System.out.println("5. Keluar");
+            System.out.println("2. Tambahkan ke Keranjang dan Checkout");
+            System.out.println("3. History Transaksi");
+            System.out.println("4. Keluar");
             System.out.print("Pilih Opsi: ");
             try {
-                int choice = scanner.nextInt(); 
+                int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
                         viewProducts();
@@ -35,27 +34,27 @@ public class BuyerController {
                         addToCart(scanner, username);
                         break;
                     case 3:
-                        checkout(scanner, username);
-                        break;
-                    case 4:
                         viewTransactionHistory(username);
                         break;
-                    case 5:
+                    case 4:
+                        System.out.println("Kembali Halaman Login...");
                         return;
                     default:
-                        System.out.println("Pilihan Tidak valid.");
+                        System.out.println("Pilihan Tidak Valid.");
                 }
             } catch (Exception e) {
                 System.out.println("Input tidak valid. Harap masukkan angka yang valid.");
-                scanner.nextLine(); // Menangani input yang tidak valid
+                scanner.nextLine();
             }
         }
     }
 
     private void viewProducts() {
-        System.out.println("\n=== Produk yang tersedia ===");
-        for (atk product : productList.getProducts()) {
-            System.out.println(product);
+        System.out.println("\n=== Produk yang Tersedia ===");
+        atk currentProduct = productList.getHead();
+        while (currentProduct != null) {
+            System.out.println(currentProduct);
+            currentProduct = currentProduct.getNext();
         }
     }
 
@@ -81,32 +80,28 @@ public class BuyerController {
         Transaction transaction = new Transaction(username, productId, quantity, totalPrice);
         transactionList.addTransaction(product, transaction);
 
-        // Update stock
+        // Update stok produk berkurang pas dibeli
         product.setStock(product.getStock() - quantity);
 
-        System.out.println("Produk berhasil ditambahkan ke keranjang!");
-        System.out.println("Total harga: " + totalPrice);
-    }
-
-    private void checkout(Scanner scanner, String username) {
-        // Pastikan keranjang tidak kosong
-        if (transactionList.getTransactionsByUsername(username).isEmpty()) {
-            System.out.println("Keranjang Anda kosong. Silakan tambahkan produk terlebih dahulu.");
-            return;
-        }
-
+        // Konfirmasi transaksi pas checkout
         System.out.println("\n=== Checkout ===");
-        System.out.println("Masukkan Metode Pembayaran (Tunai, Kartu, E-Wallet, Qris): ");
+        System.out.println("Masukkan Metode Pembayaran (Tunai, Kartu, E-Wallet, QRIS): ");
         String paymentMethod = scanner.next();
 
         System.out.println("Transaksi berhasil menggunakan " + paymentMethod + "!");
+        System.out.println("Nama Produk : " + product.getName());
+        System.out.println("Total harga : " + totalPrice);
     }
 
     private void viewTransactionHistory(String username) {
-        System.out.println("\n=== History Transaksi ===");
-        // Mengambil transaksi berdasarkan username
+        System.out.println("\n=== Riwayat Transaksi ===");
+        if (transactionList.getTransactionsByUsername(username).isEmpty()) {
+            System.out.println("Belum ada riwayat transaksi.");
+        }
+
         for (Transaction transaction : transactionList.getTransactionsByUsername(username)) {
             System.out.println(transaction);
         }
     }
+
 }

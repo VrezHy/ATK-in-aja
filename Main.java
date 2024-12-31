@@ -13,29 +13,26 @@ public class Main {
     private static atkTransactionList transactionList = new atkTransactionList();
 
     public static void main(String[] args) {
-        // Akun admin default
+        // Akun default
         userList.addUser(new User("admin", "admin123", "Admin"));
+        userList.addUser(new User("user", "user123", "User"));
+        userList.addUser(new User("user2", "user321", "User"));
 
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println("\n=== Aplikasi Beli Alat Tulis Kantor, ATK-in AJA ===");
             System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.println("3. Keluar");
+            System.out.println("2. Keluar");
             System.out.print("Pilih opsi: ");
 
             try {
-                int choice = scanner.nextInt(); // Menangkap input sebagai integer
-                
+                int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
                         login(scanner);
                         break;
                     case 2:
-                        register(scanner);
-                        break;
-                    case 3:
                         System.out.println("Keluar dari aplikasi...");
                         return;
                     default:
@@ -73,31 +70,17 @@ public class Main {
         User user = userList.authenticate(username, password, role);
 
         if (user != null) {
-            System.out.println("Login berhasil! Selamat datang, " + user.getUsername() + ".");
             if ("Admin".equalsIgnoreCase(role)) {
                 AdminController adminController = new AdminController(productList);
                 adminController.kelolaProducts(scanner);
+                System.out.println("Login berhasil! Selamat datang, " + user.getUsername() + ".");
             } else {
                 BuyerController buyerController = new BuyerController(productList, transactionList);
-                buyerController.buyerMenu(scanner, username);
+                buyerController.buyerMenu(scanner, user.getUsername());
             }
         } else {
             System.out.println("Username, password, atau role salah. Coba lagi.");
         }
-    }
-
-    private static void register(Scanner scanner) {
-        System.out.println("\n=== Register ===");
-        System.out.print("Masukkan username baru: ");
-        String username = scanner.next();
-        System.out.print("Masukkan password baru: ");
-        String password = scanner.next();
-
-        if (userList.isUsernameTaken(username)) {
-            System.out.println("Username sudah digunakan. Silakan coba username lain.");
-        } else {
-            userList.addUser(new User(username, password, "User"));
-            System.out.println("Registrasi berhasil! Silakan login menggunakan akun baru Anda.");
-        }
+        
     }
 }

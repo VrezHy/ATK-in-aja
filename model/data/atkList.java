@@ -1,40 +1,101 @@
 package model.data;
 
 import model.entity.atk;
-
-import java.util.ArrayList;
-import java.util.List;
+import Controller.AdminController;
 
 public class atkList {
-    private List<atk> products;
+    private atk head;
 
     public atkList() {
-        products = new ArrayList<>();
+        head = null;
 
-        //data dummy
-        products.add(new atk("P001", "Pulpen", 1000.0, 100));
-        products.add(new atk("P002", "Buku", 5000.0, 50));
-        products.add(new atk("P003", "Penghapus", 2000.0, 200));
+        atk product1 = new atk("P001", "Pulpen", 1000.0, 100);
+        atk product2 = new atk("P002", "Buku", 5000.0, 50);
+        atk product3 = new atk("P003", "Penghapus", 2000.0, 200);
+
+        head = product1; 
+        product1.setNext(product2);
+        product2.setPrevious(product1);
+        product2.setNext(product3);
+        product3.setPrevious(product2);
     }
 
     public void addProduct(atk product) {
-        products.add(product);
+        if (head == null) {
+            head = product;  
+        } else {
+            atk current = head;
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(product);
+            product.setPrevious(current);
+        }
     }
 
-    public List<atk> getProducts() {
-        return products;
+    public atk getHead() {
+        return head;
     }
 
     public atk findProductById(String id) {
-        for (atk product : products) {
-            if (product.getId().equals(id)) {
-                return product;
+        atk current = head;
+        while (current != null) {
+            if (current.getId().equals(id)) {
+                return current;
             }
+            current = current.getNext();
         }
         return null;
     }
 
+    public void editProduct(String id, String newName, double newPrice, int newStock) {
+        atk product = findProductById(id);
+        if (product != null) {
+            product.setName(newName);
+            product.setPrice(newPrice);
+            product.setStock(newStock);
+            System.out.println("Produk berhasil diperbarui:");
+            System.out.println(product);
+        } else {
+            System.out.println("Produk dengan ID " + id + " tidak ditemukan.");
+        }
+    }
+
+
     public void removeProduct(atk product) {
-        products.remove(product);
+        if (head == null) return; 
+
+        atk current = head;
+
+        if (current.equals(product)) {
+            head = current.getNext();
+            if (head != null) {
+                head.setPrevious(null); 
+            }
+            return;
+        }
+
+        while (current != null && !current.equals(product)) {
+            current = current.getNext();
+        }
+
+        if (current != null) {
+            atk prev = current.getPrevious();
+            atk next = current.getNext();
+            if (prev != null) {
+                prev.setNext(next);
+            }
+            if (next != null) {
+                next.setPrevious(prev);
+            }
+        }
+    }
+
+    public void printProducts() {
+        atk current = head;
+        while (current != null) {
+            System.out.println(current);
+            current = current.getNext();
+        }
     }
 }

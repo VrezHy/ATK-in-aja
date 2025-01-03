@@ -5,6 +5,29 @@ import model.entity.User;
 public class UserList {
     private UserNode head;
 
+    // Node dalam Multi-Linked List
+    private static class UserNode {
+        private User user;
+        private UserNode next;
+
+        public UserNode(User user) {
+            this.user = user;
+            this.next = null;
+        }
+
+        public User getUser() {
+            return user;
+        }
+
+        public UserNode getNext() {
+            return next;
+        }
+
+        public void setNext(UserNode next) {
+            this.next = next;
+        }
+    }
+
     public UserList() {
         head = null;
     }
@@ -41,8 +64,8 @@ public class UserList {
         while (current != null) {
             User user = current.getUser();
             if (user.getUsername().equals(username) &&
-                user.getPassword().equals(password) &&
-                user.getRole().equalsIgnoreCase(role)) {
+                    user.getPassword().equals(password) &&
+                    user.getRole().equalsIgnoreCase(role)) {
                 return user;
             }
             current = current.getNext();
@@ -50,26 +73,4 @@ public class UserList {
         return null;
     }
 
-    // Node dalam Multi-Linked List
-    private static class UserNode {
-        private User user;
-        private UserNode next;
-
-        public UserNode(User user) {
-            this.user = user;
-            this.next = null;
-        }
-
-        public User getUser() {
-            return user;
-        }
-
-        public UserNode getNext() {
-            return next;
-        }
-
-        public void setNext(UserNode next) {
-            this.next = next;
-        }
-    }
 }

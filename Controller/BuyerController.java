@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class BuyerController {
     private atkList productList;
     private atkTransactionList transactionList;
-    
 
     public BuyerController(atkList productList, atkTransactionList transactionList) {
         this.productList = productList;
@@ -76,27 +75,36 @@ public class BuyerController {
             System.out.println("Stok yang tersedia tidak mencukupi.");
             return;
         }
-
-        double totalPrice = product.getPrice() * quantity;
-        Transaction transaction = new Transaction(username, productId, quantity, totalPrice);
-        transactionList.addTransaction(product, transaction);
-
-        // Update stok produk berkurang pas dibeli
-        product.setStock(product.getStock() - quantity);
-
         // Konfirmasi transaksi pas checkout
         System.out.println("\n=== Checkout ===");
         System.out.println("Masukkan Metode Pembayaran (Tunai, Kartu, E-Wallet, QRIS): ");
         String paymentMethod = scanner.next();
 
-        System.out.println("Transaksi berhasil menggunakan " + paymentMethod + "!");
-        System.out.println("Nama Produk : " + product.getName());
-        System.out.println("Total harga : " + totalPrice);
+        double totalPrice = product.getPrice() * quantity;
+        System.out.println("Total harga yang harus di bayar = Rp." + totalPrice);
+
+        System.out.print("Uang anda =");
+        double bayar = scanner.nextDouble();
+
+        if (bayar < totalPrice) {
+            System.out.println("Uang Anda Kurang");
+        } else {
+            Transaction transaction = new Transaction(username, productId, quantity, totalPrice);
+            transactionList.addTransaction(product, transaction);
+
+            double kembalian = totalPrice - bayar;
+
+            // Update stok produk berkurang pas dibeli
+            product.setStock(product.getStock() - quantity);
+            System.out.println("Transaksi berhasil menggunakan " + paymentMethod + "!");
+            System.out.println("Nama Produk : " + product.getName());
+            System.out.println("Total harga : " + totalPrice);
+            System.out.println("Kembalian : " + kembalian);
+        }
     }
 
-    
     private void viewTransactionHistory() {
-        
+
         System.out.println("\n=== History Transaksi ===");
         if (transactionList == null || transactionList.getProductHead() == null) {
             System.out.println("Belum ada riwayat transaksi.");
@@ -104,6 +112,5 @@ public class BuyerController {
         }
         transactionList.printAllTransactions();
     }
-    
 
 }

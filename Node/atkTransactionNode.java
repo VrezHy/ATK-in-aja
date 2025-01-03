@@ -2,7 +2,7 @@ package Node;
 
 import model.entity.atk;
 import model.entity.Transaction;
-
+//node transaksi MLL
 public class atkTransactionNode {
     private atk product;
     private Transaction transaction;

@@ -41,7 +41,7 @@ public class atkList {
         return head;
     }
 
-    //cari produk dengan ID
+    //cari produk ID
     public atk findProductById(String id) {
         atk current = head;
         while (current != null) {

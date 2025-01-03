@@ -7,14 +7,10 @@ Admin:
 //TODO
 1. tambah produk digabung dengan lihat produk saat produk ditambahkan akan ngeview lihatproduk terbaru
 
-
 User:
 1. Melihat etalase produk.
-2. Menambahkan produk ke keranjang (dengan validasi stok).
+2. otomatis checkout, cetak transaksi gabung jadi satu dengan checkout
 3. Checkout dan memilih metode pembayaran.
 4. Melihat riwayat transaksi. (sudah setting setiap pembeli hanya bisa melihat riwayatnya sendiri)
 5. Input pembayaran dan kembaliannnya
-
-//TODO
-1. otomatis checkout, cetak transaksi gabung jadi satu dengan checkout
-2. Tidak usah register
+6. Tidak usah register

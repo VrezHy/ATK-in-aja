@@ -1,5 +1,6 @@
 package model.entity;
 
+//SLL
 public class User {
   private String username;
   private String password;

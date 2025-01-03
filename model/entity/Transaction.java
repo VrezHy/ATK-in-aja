@@ -55,5 +55,4 @@ public class Transaction {
         return "Nama pembeli: " + buyerUsername + ", Nama produk: " + name + ", Jumlah: " + quantity + ", Total Harga: "
                 + totalPrice;
     }
-
 }

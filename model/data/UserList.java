@@ -1,7 +1,7 @@
 package model.data;
 
 import model.entity.User;
-
+//SLL
 public class UserList {
     private UserNode head;
 
@@ -46,7 +46,7 @@ public class UserList {
         }
     }
 
-    // Mengecek apakah username sudah diambil
+    // // ngecek apakah username sudah diambil (opsional)
     public boolean isUsernameTaken(String username) {
         UserNode current = head;
         while (current != null) {
@@ -65,6 +65,7 @@ public class UserList {
             User user = current.getUser();
             if (user.getUsername().equals(username) &&
                     user.getPassword().equals(password) &&
+                    // case sensitive
                     user.getRole().equalsIgnoreCase(role)) {
                 return user;
             }

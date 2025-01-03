@@ -49,6 +49,7 @@ public class BuyerController {
         }
     }
 
+    // lihat data peoduk
     private void viewProducts() {
         System.out.println("\n=== Produk yang Tersedia ===");
         atk currentProduct = productList.getHead();
@@ -58,6 +59,7 @@ public class BuyerController {
         }
     }
 
+    // tambah produk
     private void addToCart(Scanner scanner, String username) {
         System.out.print("Masukkan ID Produk: ");
         String productId = scanner.next();
@@ -75,7 +77,7 @@ public class BuyerController {
             System.out.println("Stok yang tersedia tidak mencukupi.");
             return;
         }
-        // Konfirmasi transaksi pas checkout
+        // konfirmasi transaksi pas checkout
         System.out.println("\n=== Checkout ===");
         System.out.println("Masukkan Metode Pembayaran (Tunai, Kartu, E-Wallet, QRIS): ");
         String paymentMethod = scanner.next();
@@ -103,8 +105,8 @@ public class BuyerController {
         }
     }
 
+    //lihat history transaksi
     private void viewTransactionHistory() {
-
         System.out.println("\n=== History Transaksi ===");
         if (transactionList == null || transactionList.getProductHead() == null) {
             System.out.println("Belum ada riwayat transaksi.");

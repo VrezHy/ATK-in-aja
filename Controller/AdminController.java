@@ -78,13 +78,13 @@ public class AdminController {
         System.out.print("Masukkan ID Produk yang ingin diedit: ");
         String id = scanner.next();
 
-        // Mencari produk berdasarkan ID
+        // cari produk berdasarkan ID
         atk product = productList.findProductById(id);
         if (product == null) {
             System.out.println("Produk dengan ID " + id + " tidak ditemukan.");
             return;
         }
-        // Mengedit atribut produk
+        // edit atribut produk
         System.out.print("Edit Nama Produk: ");
         scanner.nextLine(); 
         String name = scanner.nextLine();
@@ -93,7 +93,7 @@ public class AdminController {
         System.out.print("Edit Stok Produk: ");
         int stock = scanner.nextInt();
 
-        // Memperbarui data produk
+        // perbarui data produk
         product.setName(name);
         product.setPrice(price);
         product.setStock(stock);
@@ -102,6 +102,7 @@ public class AdminController {
         System.out.println("Data produk terbaru: " + product);
     }
 
+    // delete data produk
     private void deleteProducts(Scanner scanner) {
         System.out.print("Masukkan ID Produk yang ingin dihapus: ");
         String productId = scanner.next();
@@ -115,7 +116,7 @@ public class AdminController {
             System.out.println("Produk berhasil dihapus!");
         }
     }
-
+    // lihat data produk
     private void viewProducts() {
         System.out.println("\n=== Produk yang tersedia ===");
         atk currentProduct = productList.getHead();
@@ -125,6 +126,7 @@ public class AdminController {
         }
     }
 
+    // lihat transaksi pembeli
     private void viewTransactionHistory() {
         System.out.println("\n=== History Transaksi ===");
         if (transactionList == null || transactionList.getProductHead() == null) {

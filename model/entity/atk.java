@@ -1,11 +1,10 @@
 package model.entity;
-
+//DLL dan terhubung ke atkList.java
 public class atk {
     private String id;
     private String name;
     private double price;
     private int stock;
-
     private atk next;
     private atk previous;
 
@@ -45,7 +44,6 @@ public class atk {
     public void setPrice(double price) {
         this.price = price;
     }
-    
 
     public atk getNext() {
         return next;

@@ -44,7 +44,6 @@ public class atkTransactionList {
         }
     }
     
-
     // history transaksi
     // Node produk menyimpandata produk
     // Node Transaksi menyimpan detail transaksi
